@@ -1,0 +1,19 @@
+{
+    "name": "youverse-webcam-component",
+    "version": "1.0.0",
+    "description": "This web component is designed to manage selfie photos while incorporating facial detection capabilities.",
+    "main": "./js/dist/youverse-webcam.min.js",
+    "keywords": [
+      "Youverse",
+      "Webcam",
+      "Web Component",
+      "js"
+    ],
+    "author": "Yoonik dev",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/dev-yoonik/YOUVERSE-WEBCAM-COMPONENT.git"
+    },
+    "homepage": "https://www.youverse.id"
+  }
