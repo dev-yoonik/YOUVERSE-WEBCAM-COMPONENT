@@ -62,12 +62,13 @@ Add the component name to the `.html` file.
 
  **Attribute**           | **Info**                                                                                             | **Data type** | **Default Value**                                       | **Values**       
 -------------------------|------------------------------------------------------------------------------------------------------|---------------|---------------------------------------------------------|------------------
- **cancel-verification** | Option to cancel verification. If true, an option to cancel de verification will appear              | boolean       | true                                                    | true, false      
+ **face-position-check** | Option for guided face positioning              | boolean       | true                                                    | true, false      
+ **cancel-verification** | Option to cancel verification. If true, an option to cancel de verification will appear              | boolean       | false                                                    | true, false      
  **change-camera**       | Option to change camera. If true and if exist multiple cameras, an icon to switch camera will appear | boolean       | true                                                    | true, false      
  **locale**              | The language of the component interface                                                              | string        | en                                                      | en, pt, es       
  **color**               | The color of the component interface                                                                 | string        | #492280                                                 | hex color string 
  **title-text**          | Text for the component title. Translation based on the language selected                             | string        | Take a selfie                                           | string           
- **info-text**           | Text for the component info. Translation based on the language selected                              | string        | Make sure that your face is in the frame and is visible | string           
+ **info-text**           | Text for the component info. Translation based on the language selected                              | string        | Make sure that your face is in the frame and is visible | string                 
 
 ## Events
 
@@ -79,13 +80,22 @@ For example:
 document.addEventListener('NEXT_STEP_EVENT', (event) => console.log(event.detail)); // Event
 ```
 
+### Type of events:
+
+| **Event**                    | **Description**                                                | **Event Handling**                                           |
+|------------------------------|----------------------------------------------------------------|--------------------------------------------------------------|
+| **NEXT_STEP_EVENT**          | Event triggered when a selfie is taken                          | Handled by a designated event listener in the application(listener)    |
+| **CANCEL_EVENT**             | Event triggered when cancellation occurs                       | Handled by a designated event listener in the application(listener)    |
+| **RESPONSE_NEXT_STEP_EVENT** | Event to communicate with the component after NEXT_STEP_EVENT   | Dispatched by the application to signal handling components(dispatch)  |
+| **RESPONSE_CANCEL_EVENT**    | Event to communicate with the component after CANCEL_EVENT      | Dispatched by the application to signal handling components(dispatch)  |
+
+### Response Events
+
 Type of events:
 
- **Event**                    | **Description**                                                
-------------------------------|----------------------------------------------------------------
- **NEXT_STEP_EVENT**          | Event triggered when selfie is taken                           
- **CANCEL_EVENT**             | Event triggered when cancellation occurs                       
- **RESPONSE_NEXT_STEP_EVENT** | Event to communicate to component after NEXT_STEP_EVENT occurs 
- **RESPONSE_CANCEL_EVENT**    | Event to communicate to component after CANCEL_EVENT occurs    
+ **Event**                    | **Response Parameters** | **Usage** | **Description**                                                
+------------------------------|-------------|------|----------------------------------------------------------------
+ **NEXT_STEP_EVENT**          |`{ detail: { image: string } }`  | `event.detail.image` | The event returns an image                    
+ **CANCEL_EVENT** | `null` | `null` | The event has no return 
 
 For more information please [contact us](mailto:tech@youverse.id).
