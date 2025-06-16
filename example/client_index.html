@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Youverse Webcam</title>
-    <script src="../js/dist/youverse-webcam.min.js"></script>
 
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youverse Webcam</title>
+  <script src="../js/dist/youverse-webcam.min.js"></script>
 
-  <body>
-    <div>
-      <youverse-webcam
-        cancel-verification="true"
-        change-camera="true"
-        locale="en"
-      ></youverse-webcam>
-    </div>
-  </body>
-
-  <script>
-    const EVENT_TYPES = {
-      NEXT_STEP_EVENT: "NEXT_STEP_EVENT",
-      RESPONSE_NEXT_STEP_EVENT: "RESPONSE_NEXT_STEP_EVENT",
-      CANCEL_EVENT: "CANCEL_EVENT",
-      RESPONSE_CANCEL_EVENT: "RESPONSE_CANCEL_EVENT",
-    };
-
-    function createResponseEvent(responseMessage, eventType) {
-      return new CustomEvent(eventType, {
-        detail: responseMessage,
-      });
+  <style>
+    body {
+      margin: 0;
     }
+  </style>
+</head>
 
-    document.addEventListener(EVENT_TYPES.NEXT_STEP_EVENT, function (event) {
-      const { image } = event.detail;
-      console.log(image);
+<body>
+  <div>
+    <youverse-webcam cancel-verification="true" change-camera="true" locale="en"></youverse-webcam>
+  </div>
+</body>
 
-      //Interact with a web component
+<script>
+  const EVENT_TYPES = {
+    NEXT_STEP_EVENT: "NEXT_STEP_EVENT",
+    RESPONSE_NEXT_STEP_EVENT: "RESPONSE_NEXT_STEP_EVENT",
+    CANCEL_EVENT: "CANCEL_EVENT",
+    RESPONSE_CANCEL_EVENT: "RESPONSE_CANCEL_EVENT",
+  };
+
+  function createResponseEvent(responseMessage, eventType) {
+    return new CustomEvent(eventType, {
+      detail: responseMessage,
+    });
+  }
+
+  document.addEventListener(EVENT_TYPES.NEXT_STEP_EVENT, function (event) {
+    const { image } = event.detail;
+    console.log(image);
+
+    //Interact with a web component
+    setTimeout(() => {
       document.dispatchEvent(
         new CustomEvent(EVENT_TYPES.RESPONSE_NEXT_STEP_EVENT)
       );
-    });
+    }, 5000);
 
-    document.addEventListener(EVENT_TYPES.CANCEL_EVENT, function (event) {
-      console.log("Canceled");
+  });
 
-      //Interact with a web component
-      document.dispatchEvent(
-        new CustomEvent(EVENT_TYPES.RESPONSE_CANCEL_EVENT)
-      );
-    });
-  </script>
+  document.addEventListener(EVENT_TYPES.CANCEL_EVENT, function (event) {
+    console.log("Canceled");
+
+    //Interact with a web component
+    document.dispatchEvent(
+      new CustomEvent(EVENT_TYPES.RESPONSE_CANCEL_EVENT)
+    );
+  });
+</script>
+
 </html>
