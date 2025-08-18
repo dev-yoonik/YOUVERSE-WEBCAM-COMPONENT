@@ -1,8 +1,15 @@
 {
   "name": "youverse-webcam-component",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "This web component is designed to manage selfie photos while incorporating facial detection capabilities.",
   "main": "./js/dist/youverse-webcam.min.js",
+  "types": "./js/ts/youverse-webcam.d.ts",
+  "exports": {
+    ".": {
+      "import": "./js/dist/youverse-webcam.min.js",
+      "types": "./js/ts/youverse-webcam.d.ts"
+    }
+  },
   "keywords": [
     "Youverse",
     "Webcam",
