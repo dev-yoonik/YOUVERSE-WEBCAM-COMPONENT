@@ -4,6 +4,7 @@ declare namespace JSX {
             cancelVerification?: boolean;
             changeCamera?: boolean;
             facePositionCheck?: boolean;
+            backgroundColor?: string;
             titleText?: string;
             infoText?: string;
             license?: string;
@@ -23,6 +24,7 @@ interface YourverseWebcam extends HTMLElement {
     cancelVerification?: boolean;
     changeCamera?: boolean;
     facePositionCheck?: boolean;
+    backgroundColor?: string;
     titleText?: string;
     infoText?: string;
     license?: string;

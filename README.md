@@ -33,8 +33,8 @@ Add the component name to the `.html` file.
 
 ```html
 <youverse-webcam 
-    cancel-verification 
-    change-camera
+    cancel-verification="false"
+    change-camera="true"
 ></youverse-webcam>
 ```
 
@@ -52,9 +52,8 @@ Add the component name to the `.html` file.
 
 ```html
 <youverse-webcam 
-    cancel-verification 
-    change-camera
-    locale="en"
+    cancel-verification="false"
+    change-camera="true"
 ></youverse-webcam>
 ```
 
@@ -63,10 +62,11 @@ Add the component name to the `.html` file.
  **Attribute**           | **Info**                                                                                             | **Data type** | **Default Value**                                       | **Values**       
 -------------------------|------------------------------------------------------------------------------------------------------|---------------|---------------------------------------------------------|------------------
  **face-position-check** | Option for guided face positioning              | boolean       | true                                                    | true, false      
- **cancel-verification** | Option to cancel verification. If true, an option to cancel de verification will appear              | boolean       | false                                                    | true, false      
+ **cancel-verification** | Option to cancel verification. If true, an option to cancel de verification will appear              | boolean       | true                                                    | true, false      
  **change-camera**       | Option to change camera. If true and if exist multiple cameras, an icon to switch camera will appear | boolean       | true                                                    | true, false      
  **locale**              | The language of the component interface                                                              | string        | en                                                      | en, pt, es       
  **color**               | The color of the component interface                                                                 | string        | #492280                                                 | hex color string 
+ **background-color**               | Background color of the component interface                                                                 | string        | #fff                                                 | hex color string 
  **title-text**          | Text for the component title. Translation based on the language selected                             | string        | Take a selfie                                           | string           
  **info-text**           | Text for the component info. Translation based on the language selected                              | string        | Make sure that your face is in the frame and is visible | string                 
 
