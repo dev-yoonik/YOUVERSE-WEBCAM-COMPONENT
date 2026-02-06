@@ -16,16 +16,21 @@
 
 <body>
   <div>
-    <youverse-webcam cancel-verification="true" change-camera="true" locale="en"></youverse-webcam>
+    <youverse-webcam
+     license="Your.Jwt.License"
+     cancel-verification="true" 
+     change-camera="true"
+     locale="en" 
+    />
   </div>
 </body>
 
 <script>
   const EVENT_TYPES = {
-    NEXT_STEP_EVENT: "NEXT_STEP_EVENT",
-    RESPONSE_NEXT_STEP_EVENT: "RESPONSE_NEXT_STEP_EVENT",
-    CANCEL_EVENT: "CANCEL_EVENT",
-    RESPONSE_CANCEL_EVENT: "RESPONSE_CANCEL_EVENT",
+    YV_SELFIE_NEXT_STEP: "YV_SELFIE_NEXT_STEP",
+    YV_SELFIE_RESPONSE_NEXT_STEP: "YV_SELFIE_RESPONSE_NEXT_STEP",
+    YV_SELFIE_CANCEL: "YV_SELFIE_CANCEL",
+    YV_SELFIE_RESPONSE_CANCEL: "YV_SELFIE_RESPONSE_CANCEL",
   };
 
   function createResponseEvent(responseMessage, eventType) {
@@ -34,25 +39,24 @@
     });
   }
 
-  document.addEventListener(EVENT_TYPES.NEXT_STEP_EVENT, function (event) {
-    const { image } = event.detail;
-    console.log(image);
-
+  document.addEventListener(EVENT_TYPES.YV_SELFIE_NEXT_STEP, async function (event) {
+    console.log(event.detail);
+    
     //Interact with a web component
     setTimeout(() => {
       document.dispatchEvent(
-        new CustomEvent(EVENT_TYPES.RESPONSE_NEXT_STEP_EVENT)
+        new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_NEXT_STEP)
       );
     }, 5000);
 
   });
 
-  document.addEventListener(EVENT_TYPES.CANCEL_EVENT, function (event) {
+  document.addEventListener(EVENT_TYPES.YV_SELFIE_CANCEL, function (event) {
     console.log("Canceled");
 
     //Interact with a web component
     document.dispatchEvent(
-      new CustomEvent(EVENT_TYPES.RESPONSE_CANCEL_EVENT)
+      new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_CANCEL)
     );
   });
 </script>
