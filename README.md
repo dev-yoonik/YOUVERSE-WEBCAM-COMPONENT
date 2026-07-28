@@ -63,8 +63,12 @@ Connect the script in your `.html` file. Here is the CDN link: `https://www.jsde
 For example:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/youverse-webcam-component@latest/js/dist/youverse-webcam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/youverse-webcam-component@latest/js/dist/youverse-webcam.min.js"
+        integrity="sha384-GE/E2IVd6L8//kLYg9p8Ij9FD6uQbPsIZZEZ32NvjqSUR417Nf3F2MsouE/o5e6N"
+        crossorigin="anonymous"></script>
 ```
+
+> **Note:** The `integrity` attribute ensures the script has not been tampered with. The hash is updated automatically with each release — check the [latest release](https://github.com/dev-yoonik/YOUVERSE-WEBCAM-COMPONENT/releases/latest) for the current value. The `crossorigin="anonymous"` attribute is required when loading from a CDN.
 
 Add the component name to the `.html` file.
 

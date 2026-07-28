@@ -1,64 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youverse Webcam</title>
+    <!-- <script>
+      (function () {
+        function createFakeStream() {
+          return new Promise((resolve) => {
+            const vid = document.createElement("video");
+            vid.src = "rec_nuno.mov";
+            vid.loop = true;
+            vid.muted = true;
+            vid.playsInline = true;
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youverse Webcam</title>
-  <script src="../js/dist/youverse-webcam.min.js"></script>
+            vid.onloadedmetadata = function () {
+              const c = document.createElement("canvas");
+              c.width = vid.videoWidth || 1920;
+              c.height = vid.videoHeight || 1080;
+              const ctx = c.getContext("2d");
 
-  <style>
-    body {
-      margin: 0;
+              function draw() {
+                ctx.drawImage(vid, 0, 0, c.width, c.height);
+                requestAnimationFrame(draw);
+              }
+
+              vid.play().then(() => {
+                draw();
+                const stream = c.captureStream(30);
+                const track = stream.getVideoTracks()[0];
+                Object.defineProperty(track, "label", {
+                  value: "Integrated HD Webcam",
+                  writable: false,
+                });
+                Object.defineProperty(track, "getSettings", {
+                  value: () => ({
+                    deviceId: "fake-device-001",
+                    width: c.width,
+                    height: c.height,
+                    frameRate: 30,
+                    resizeMode: "none",
+                  }),
+                });
+                Object.defineProperty(track, "getCapabilities", {
+                  value: () => ({
+                    width: { min: 1, max: 3840 },
+                    height: { min: 1, max: 2160 },
+                    frameRate: { min: 1, max: 60 },
+                  }),
+                });
+                Object.defineProperty(track, "applyConstraints", {
+                  value: () => Promise.resolve(),
+                });
+                resolve(stream);
+              });
+            };
+
+            vid.load();
+          });
+        }
+
+        const origEnum = navigator.mediaDevices.enumerateDevices.bind(
+          navigator.mediaDevices,
+        );
+        navigator.mediaDevices.enumerateDevices = async function () {
+          const devices = await origEnum();
+          const nonVideo = devices.filter((d) => d.kind !== "videoinput");
+          return [
+            ...nonVideo,
+            {
+              deviceId: "fake-device-001",
+              kind: "videoinput",
+              label: "Integrated HD Webcam",
+              groupId: "fake-group-001",
+              toJSON() {
+                return this;
+              },
+            },
+          ];
+        };
+
+        const realGUM = navigator.mediaDevices.getUserMedia.bind(
+          navigator.mediaDevices,
+        );
+        navigator.mediaDevices.getUserMedia = async function (constraints) {
+          if (constraints && constraints.video) return createFakeStream();
+          return realGUM(constraints);
+        };
+      })();
+    </script> -->
+    <script src="../js/dist/youverse-webcam.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <youverse-webcam
+        license="Your.Jwt.License"
+        cancel-verification="true"
+        change-camera="true"
+        locale="en"
+      />
+    </div>
+  </body>
+
+  <script>
+    const EVENT_TYPES = {
+      YV_SELFIE_NEXT_STEP: "YV_SELFIE_NEXT_STEP",
+      YV_SELFIE_RESPONSE_NEXT_STEP: "YV_SELFIE_RESPONSE_NEXT_STEP",
+      YV_SELFIE_CANCEL: "YV_SELFIE_CANCEL",
+      YV_SELFIE_RESPONSE_CANCEL: "YV_SELFIE_RESPONSE_CANCEL",
+    };
+
+    function createResponseEvent(responseMessage, eventType) {
+      return new CustomEvent(eventType, {
+        detail: responseMessage,
+      });
     }
-  </style>
-</head>
 
-<body>
-  <div>
-    <youverse-webcam
-     license="Your.Jwt.License"
-     cancel-verification="true" 
-     change-camera="true"
-     locale="en" 
-    />
-  </div>
-</body>
+    document.addEventListener(
+      EVENT_TYPES.YV_SELFIE_NEXT_STEP,
+      async function (event) {
+        console.log(event.detail);
 
-<script>
-  const EVENT_TYPES = {
-    YV_SELFIE_NEXT_STEP: "YV_SELFIE_NEXT_STEP",
-    YV_SELFIE_RESPONSE_NEXT_STEP: "YV_SELFIE_RESPONSE_NEXT_STEP",
-    YV_SELFIE_CANCEL: "YV_SELFIE_CANCEL",
-    YV_SELFIE_RESPONSE_CANCEL: "YV_SELFIE_RESPONSE_CANCEL",
-  };
-
-  function createResponseEvent(responseMessage, eventType) {
-    return new CustomEvent(eventType, {
-      detail: responseMessage,
-    });
-  }
-
-  document.addEventListener(EVENT_TYPES.YV_SELFIE_NEXT_STEP, async function (event) {
-    console.log(event.detail);
-    
-    //Interact with a web component
-    setTimeout(() => {
-      document.dispatchEvent(
-        new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_NEXT_STEP)
-      );
-    }, 5000);
-
-  });
-
-  document.addEventListener(EVENT_TYPES.YV_SELFIE_CANCEL, function (event) {
-    console.log("Canceled");
-
-    //Interact with a web component
-    document.dispatchEvent(
-      new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_CANCEL)
+        //Interact with a web component
+        setTimeout(() => {
+          document.dispatchEvent(
+            new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_NEXT_STEP),
+          );
+        }, 5000);
+      },
     );
-  });
-</script>
 
+    document.addEventListener(EVENT_TYPES.YV_SELFIE_CANCEL, function (event) {
+      console.log("Canceled");
+
+      //Interact with a web component
+      document.dispatchEvent(
+        new CustomEvent(EVENT_TYPES.YV_SELFIE_RESPONSE_CANCEL),
+      );
+    });
+  </script>
 </html>
