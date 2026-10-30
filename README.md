@@ -64,7 +64,7 @@ For example:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/youverse-webcam-component@latest/js/dist/youverse-webcam.min.js"
-        integrity="sha384-GE/E2IVd6L8//kLYg9p8Ij9FD6uQbPsIZZEZ32NvjqSUR417Nf3F2MsouE/o5e6N"
+        integrity="sha384-hHXr0WTbU2xLPEp//ACDV8OZAQ2eelraCmIfxP90dYAms91jH/KxriGdK5FTGSeA"
         crossorigin="anonymous"></script>
 ```
 
