@@ -65,8 +65,8 @@ Connect the script in your `.html` file. Here is the CDN link: `https://www.jsde
 For example:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/youverse-webcam-component@3.0.0/js/dist/youverse-webcam.min.js"
-        integrity="sha384-77/KGDA1TBxyxppp6nJmOWzN6tj6JJi4B3yq3tCt0pBsO2Id51Com3FCmAw1KaUO"
+<script src="https://cdn.jsdelivr.net/npm/youverse-webcam-component@3.0.1/js/dist/youverse-webcam.min.js"
+        integrity="sha384-Z3ptLIVdx+Y46NseIpjUwCRH3so2Kuf/JhxwslITbpXnrrrawnuOE7Xo7UaBzMJ4"
         crossorigin="anonymous"></script>
 ```
 
